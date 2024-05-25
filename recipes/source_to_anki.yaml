@@ -15,6 +15,7 @@
       - guid:pl
       - guid:it
       - guid:da
+      - guid:el
 
 - build_parts:
   - note_model_from_yaml_part:
@@ -351,6 +352,27 @@
 
       file_mappings: *file_mappings
 
+  - notes_from_csvs:
+      part_id: greek
+      #save_to_file:
+
+      note_model_mappings:
+        - note_models: *note_models_in_mapping
+          columns_to_fields:
+            <<: *default_columns_to_fields
+
+            guid:el             : guid
+            country:el          : Country
+            country info:el     : Country info
+            capital:el          : Capital
+            capital info:el     : Capital info
+            capital hint:el     : Capital hint
+            flag similarity:el  : Flag similarity
+
+          personal_fields: [ ]
+
+      file_mappings: *file_mappings
+
 - generate_crowd_anki:
     <<: &default_crowd_anki_gen
       headers: default header
@@ -430,6 +452,11 @@
     folder: build/Ultimate Geography [DA]
     notes:
       part_id: danish
+- generate_crowd_anki:
+    <<: *default_crowd_anki_gen
+    folder: build/Ultimate Geography [EL]
+    notes:
+      part_id: greek
 
 
 - generate_crowd_anki:
@@ -526,4 +553,10 @@
     folder: build/Ultimate Geography [DA] [Extended]
     notes:
       part_id: danish
+      <<: *override_nm
+- generate_crowd_anki:
+    <<: *extended_deck
+    folder: build/Ultimate Geography [EL] [Extended]
+    notes:
+      part_id: greek
       <<: *override_nm
